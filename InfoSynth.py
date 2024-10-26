@@ -1,9 +1,16 @@
 import streamlit as st
+from utility import check_password
 
 st.set_page_config(
     page_title="Welcome to the InfoSynth (proof of concept)",
     page_icon="👋",
 )
+
+# Do not continue if check_password is not True.  
+if not check_password():  
+    st.stop()
+
+# endregion <--------- Streamlit Page Configuration --------->
 
 st.write("# Welcome to the InfoSynth (proof of concept)! 👋")
 

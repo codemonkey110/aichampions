@@ -1,9 +1,16 @@
 import streamlit as st
+from utility import check_password
 
 st.set_page_config(
     page_title="Methodology",
     page_icon="🛠️",
 )
+
+# Do not continue if check_password is not True.  
+if not check_password():  
+    st.stop()
+
+# endregion <--------- Streamlit Page Configuration --------->
 
 # Set the title of the page
 st.title("Methodology for Creating a Proof of Concept (PoC) with a Multi-PDF LLM")

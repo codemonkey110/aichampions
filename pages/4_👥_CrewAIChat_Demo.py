@@ -6,9 +6,15 @@ from crewai.process import Process
 from langchain_core.callbacks import BaseCallbackHandler
 from langchain_openai import ChatOpenAI
 from typing import Any, Dict
-
+from utility import check_password
 
 st.set_page_config(page_title="Crew AI Chat Demo", page_icon="👥")
+
+# Do not continue if check_password is not True.  
+if not check_password():  
+    st.stop()
+
+# endregion <--------- Streamlit Page Configuration --------->
 
 st.markdown("# Crew AI Chat Demo")
 st.sidebar.header("Crew AI Chat Demo")

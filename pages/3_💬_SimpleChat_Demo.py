@@ -2,8 +2,16 @@ import streamlit as st
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+from utility import check_password
+
 
 st.set_page_config(page_title="Simple Chat Demo", page_icon="💬")
+
+# Do not continue if check_password is not True.  
+if not check_password():  
+    st.stop()
+
+# endregion <--------- Streamlit Page Configuration --------->
 
 st.markdown("# Simple Chat Demo")
 st.sidebar.header("Simple Chat Demo")
