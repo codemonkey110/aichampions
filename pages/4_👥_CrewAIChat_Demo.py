@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-#from openai import OpenAI
+from dotenv import load_dotenv
 from crewai import Crew, Agent, Task
 from crewai.process import Process
 from langchain_core.callbacks import BaseCallbackHandler
@@ -13,19 +13,13 @@ st.set_page_config(page_title="Crew AI Chat Demo", page_icon="👥")
 st.markdown("# Crew AI Chat Demo")
 st.sidebar.header("Crew AI Chat Demo")
 
-# Sidebar input for OpenAI API key
-openai_api_key = ""
-api_key_input = st.sidebar.text_input("Enter OpenAI API Key", value=openai_api_key, type="password")
-
-# Store the API key in session state
-if api_key_input:
-    st.session_state["openai_api_key"] = api_key_input
+# Load OpenAI API key
+load_dotenv()  
+openai_api_key = os.getenv("KEY")
+os.environ["OPENAI_API_KEY"] = openai_api_key
 
 # Initialize OpenAI client with the API key from session state
-if "openai_api_key" in st.session_state:
-    client = ChatOpenAI(api_key=st.session_state["openai_api_key"], temperature=0.5)
-else:
-    st.error("Please enter your OpenAI API key in the sidebar.")
+client = ChatOpenAI(api_key=openai_api_key, temperature=0.5)
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
