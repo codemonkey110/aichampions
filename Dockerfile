@@ -7,6 +7,18 @@
 # which is a smaller, more lightweight version of the full Python image.
 FROM python:3.12-slim
 
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    g++-11 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set g++-11 as the default compiler
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
+
+# Verify the compiler version
+RUN g++ --version
+
 # This ensures that Python output is not buffered, 
 # which is useful for real-time logging and debugging.
 ENV PYTHONUNBUFFERED True
