@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from dotenv import load_dotenv
-from crewai import Crew, Agent, Task
+from crewai import Crew, Agent, Task, LLM
 from crewai.process import Process
 from langchain_core.callbacks import BaseCallbackHandler
 from langchain_openai import ChatOpenAI
@@ -25,7 +25,17 @@ openai_api_key = os.getenv("KEY")
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
 # Initialize OpenAI client with the API key from session state
-client = ChatOpenAI(api_key=openai_api_key, temperature=0.5)
+client = LLM(
+    model="gpt-4o",  # Use the standard OpenAI model name
+    api_key=openai_api_key,
+    base_url="https://litellm.govtext.gov.sg/",
+    default_headers={
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0"
+    },
+    custom_llm_provider="azure openai",
+    deployment_id="gpt-4o-prd-gcc2-lb"  # Your Azure deployment name
+)
+
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
