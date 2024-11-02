@@ -60,6 +60,7 @@ project_manager = Agent(
                  You do not write code.''',
     goal='Generate actionable steps for task completion.',
     llm=client,
+    verbose=True,
     callbacks=[CustomHandler("Project Manager")],
 )
 
@@ -71,6 +72,7 @@ coder = Agent(
                  You produce functional, feature complete code.''',
     goal='Develop high-quality, well-structured Python code.',
     llm=client,
+    verbose=True,
     callbacks=[CustomHandler("Coder")],
 )
 
