@@ -16,31 +16,22 @@ if not check_password():
 st.markdown("# Simple Chat Demo")
 st.sidebar.header("Simple Chat Demo")
 
-# Load the OpenAI API key from the .env file
-load_dotenv()
-openai_api_key = os.getenv("OPENAI_API_KEY")
-openai_api_key = ""
+# Load OpenAI API key
+load_dotenv()  
+openai_api_key = os.getenv("KEY")
+os.environ["OPENAI_API_KEY"] = openai_api_key
 
-client = OpenAI(api_key=openai_api_key)
-
-# Sidebar input for OpenAI API key
-api_key_input = st.sidebar.text_input("Enter OpenAI API Key", value=openai_api_key, type="password")
-
-# Store the API key in session state
-if api_key_input:
-    st.session_state["openai_api_key"] = api_key_input
-
-# Initialize OpenAI client with the API key from session state
-if "openai_api_key" in st.session_state:
-    client = OpenAI(api_key=st.session_state["openai_api_key"])
-else:
-    st.error("Please enter your OpenAI API key in the sidebar.")
+client = OpenAI(
+    api_key=openai_api_key,
+    base_url="https://litellm.govtext.gov.sg/",
+    default_headers={"user-agent": "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0"},
+)
 
 st.title("Chat Application")
 st.write("This is a simple chat application using the OpenAI API.")
 
 if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-3.5-turbo"
+    st.session_state["openai_model"] = "gpt-4o-prd-gcc2-lb"
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
