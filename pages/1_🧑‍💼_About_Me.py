@@ -35,13 +35,11 @@ During the bootcamp, I learned about the following topics:
 # My Project section
 st.subheader("My Project")
 st.write("""
-In the final month, I applied these skills to develop a proof-of-concept app aimed at improving my day to day processes. This project demonstrates the practical use of AI in synthesizing information from different sources.
+In the final month, I applied these skills to develop a proof-of-concept app aimed at improving my day to day processes. This project demonstrates the practical use of AI using agentic frameworks.
 """)
 
 # Looking Ahead section
 st.subheader("Looking Ahead")
 st.write("""
 I plan to continue exploring AI technologies and using them in my current role. The AI Champions Bootcamp Pilot has given me practical experience and provided new insights into how it should be applied to my day to day work.
-
-Thank you for visiting my page.
 """)
